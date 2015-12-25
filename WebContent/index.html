@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html ng-app="icsaApp" lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ICSA</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/mic.css" rel="stylesheet">
+    <link href="css/bootstrap-tokenfield.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/icsa.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-tokenfield.min.js"></script>
+    <script src="js/icsa.js"></script>
+    <script src="js/jquery.cycle.all.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+
+    <script src="js/speechUtils.js"></script>
+</head>
+
+<body ng-controller="icsaCtrl">
+<div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalTitle"></h4>
+                </div>
+                <div class="modal-body" id="myModalBody">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Find a solution</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Cases</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">People</a></li>
+                    <li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">Log In</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="row">
+                    <div class="col-md-12  col-md-offset-1">
+                        <div class="intro-lead-in">Welcome To Intelligent Customer Service Assistant!</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-5">
+                        <a href="#panels" class="page-scroll" ng-click="phoneClicked($event)">
+                            <img src="images/phone.ico"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+</div>
+
+
+<section id="panels">
+    <div class="container">
+
+        <div class="row" style="padding-bottom: 15px; margin-top: 75px">
+            <div id="div_start" class="col-md-1">
+                <img alt="Start" class="start_button_green" id="start_button" height="64" width="64"
+                     src="images/phone-green.png" onclick="startButton(event)"/>
+            </div>
+            <div id="results" class="col-md-11">
+                <span class="final" id="final_span"></span>
+                <span class="interim" id="interim_span"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <input type="text" ng-model="tokens" class="form-control col-md-12" id="tokenfield"/>
+        </div>
+
+        <div id="circularG">
+            <div id="circularG_1" class="circularG"></div>
+            <div id="circularG_2" class="circularG"></div>
+            <div id="circularG_3" class="circularG"></div>
+            <div id="circularG_4" class="circularG"></div>
+            <div id="circularG_5" class="circularG"></div>
+            <div id="circularG_6" class="circularG"></div>
+            <div id="circularG_7" class="circularG"></div>
+            <div id="circularG_8" class="circularG"></div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="grid">
+                <div ng-repeat="x in items">
+                    <div class="grid-item col-md-4 fade">
+                        <div class="panel panel-default panel-callout panel-callout-{{x.type}}">
+                            <div class="panel-heading panel-heading-grid"
+                                 data-toggle="modal"
+                                 data-target="#myModal" data-item="{{x}}">
+                                <h4>{{x.title}}</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="caption">
+                                    <p>{{x.description}}</p>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <!-- Button trigger modal -->
+            <div class="panel panel-default fade" id="panel_contact">
+                <div class="panel-heading"><h4>Contacts</h4></div>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>Mark Woodall</td>
+                        <td>+12345670000</td>
+                    </tr>
+                    <tr>
+                        <td>Mike Carlson</td>
+                        <td>+12345670001</td>
+                    </tr>
+                    <tr>
+                        <td>Andrey Logachev</td>
+                        <td>+12345670002</td>
+                    </tr>
+                    <tr>
+                        <td>Martyn Rolling</td>
+                        <td>+12345670003</td>
+                    </tr>
+                    <tr>
+                        <td>Richard Mu</td>
+                        <td>+12345670004</td>
+                    </tr>
+                    <tr>
+                        <td>PatrickThomas Aloumbe Adine</td>
+                        <td>+12345670005</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- /.container -->
+
+<div class="container">
+    <hr>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12"/>
+        </div>
+    </footer>
+
+</div>
+<!-- /.container -->
+<script src="js/chrome.min.js"></script>
+<script src="js/chrome.api.js"></script>
+</body>
+
+</html>

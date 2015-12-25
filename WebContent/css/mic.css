@@ -1,0 +1,35 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02.12.2015, 2:09:01
+    Author     : Алексей
+*/
+#div_start #start_button{
+    /*width:150px;*/
+}
+
+/*
+#div_start.rec>#start_button{
+    -webkit-filter: invert(1);
+    filter: invert(1);    
+}
+#div_start.normal>#start_button{
+    -webkit-filter: invert(0);
+    filter: invert(0);    
+}
+#div_start{
+    background: #FFFFFF;
+    border-radius: 50%;
+    width:250px;
+
+}
+#div_start.rec{
+    background: #FF0000;
+    border-radius: 50%;
+    width:250px;
+
+}
+*/

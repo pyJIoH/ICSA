@@ -1,0 +1,196 @@
+{
+  "docs": [
+    {
+      "type": "customer",
+      "title": "Single Sign On doesn't work in CorVu NG",
+      "description": "Single Sign On doesn't seem to be working and the user has to log in again with his/her Windows credentials. We have 2 user accounts. Sql.User - is a domain account and local account corvu.user - is only a domain account.\n\nWhile logged into the server, I'm able to log into the Menu directly with the Sql.User account confirming that Single Sign seems to work ok. But when I log into the server using the corvu.user account, it prompts me with a login box to enter the user id and password.\n\nNot sure what the problem is.",
+      "resolution": "Resolved",
+      "solution": "Symptom\n\nSingle Sign On does not appear to be working when accessing CorVu NG web for some users. They are prompted for the username/password login box. After entering Active Directory user/pass,they are able to get into the application. The customer is using Windows Integrated Security with the ISAPI IIS redirect to Tomcat.\n\nTests Performed\n\nAsked the customer to use the cgi.exe to gather HTTP headers associated with the user that is working and the user that is not working. \n\nCause\n\n\nResolution\n\nChanged Settings in IE on the Client's PC and it worked. ",
+      "keywords": "CorVu NG:10,Single Sign On:10,single sign:10,CorVu NG:9,CorVu NG Web:9,username:6,password:6",
+	  "contacts":"mcarlson@rocketsoftware.com"
+    },
+	{
+      "type": "customer",
+      "title": "Single Sign On doesn't work in CorVu NG",
+      "description": "I have configured ISAPI Redirector and Apache Tomcat, but when I try to open CorVu NG Web Pro, I am getting either 404 or 500 error. I think I tried everything. Could you assist?",
+      "resolution": "Resolved",
+      "solution": "You should check the HTTP error code following GET:\n- Error 404 - Make sure you entered the URL correctly.\n- Error 500 - Make sure the virtual directory created was called 'jakarta'. Make sure that the extension_uri setting is correct. Check the workers.properties file and make sure the port setting for worker.ajp12.port is the same as the port specified in the server.xml for the 'Apache AJP12 support'",
+      "keywords": "CorVu NG:10,Single Sign On:10,single sign:10,CorVu NG Web:9,error messages:8,error message:9,error:8,404:8,500:8",
+	  "contacts":"alogachev@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "Single Sign On for CorVU NG Dashboards",
+      "description": "Please advise how we configure single sign on for users to view published dashboards created via CorVu NG.",
+      "resolution": "Resolved",
+      "solution": "Single Sign-on capability is provided with Repositories which use LDAP authentication.\n\nSo first you need to create a repository with LDAP as the Security Provider method (this is an option when creating a repository, it cannot be changed after creation). \n\nThen you need to defined the LDAP connection settings, the user filters and group filters required to authenticate specific users and give them access to the repository. this requires the skills of your LDAP administrator (Active Directory IT services?).\n\nYou can define a master login which by-passes LDAP so you can always get into these settings.\n\nOnce the LDAP logins have been tested and proven to work, then tick the box which Accespts user's credentials",
+	  "keywords":"CorVu NG:10,Single Sign On:9,single sign:9,CorVu Web Pro:9,Dashboards:7,Repositories:5",
+	  "contacts":"mwoodall@rocketsoftware.com,mrolling@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "Any documentation on how CorVu NG can be used with Sharepoint",
+      "description": "I'm trying to find any written documentation on how CorvuNG can be used with SharePoint.  Areas of interest is basic single sign-on security, and web parts.",
+      "resolution": "Resolved",
+      "solution": "The Single Sign On documentation is the only additional documentation\nrelating to this request that we have.  Currently, there is not any additional Sharepoint specific documentation.\n\nThat being said, you have a couple of options when it comes to Sharepoint:\n\n1)  Embed the 'weblink' for the object in Sharepoint.  This will run/display the CorVu NG object in Sharepoint.  However, I would note that this will consume a license when the page is opened.  Due to this fact, I don't often recommend doing this.  It can also use more resources on the server since you potentially have a bunch of objects being run anytime someone opens a particular page (this is especially noticeable if the objects are added to the main page).\n\n2)  Use Sharepoint as the menu system and just put Hyperlinks to the CorVu NG weblinks (or other CorVu NG URLs) in the Sharepoint page.  This way, the license will only get used when the links are launched.\n\n3)  Embed a static image/pdf of the CorVu NG object in the page. You could then link from here to the live CorVu NG object (again, this helps to preserve licenses and ram/cpu).",
+	  "keywords":"CorVu NG:10,Sharepoint:9,Single Sign On:9,single sign:9,CorVu Web Pro:9,Documentation:8,Weblink:6",
+	  "contacts":"mwoodall@rocketsoftware.com,alogachev@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "Controlling access from HyperVu to an NG report link",
+      "description": "I've now successfully set up the required NG Dashboard using a 'guest' account, that ensures anyone who clicks the link can open it without receiving log-in prompts.\n\nHowever, it is still a link I wish to control access to ... and I know I can do this in CorBusiness, as follows:\n\nIf I wanted a link in HyperVu to only work for certain individuals, I can use http://rincewind/corvucgi/cvhtmsrv.exe?dir= to go to the folder structure, select the folder containing the CBR or QRP etc and assign certain users or user groups permissions, save the .cvjaccess file.  Then, many can view/select the link, but the report will only open for those in the permissions list, others get the permissions error\nmessage.\n\nI suspect this isn't possible with NG? ... as it uses repositories and I can't point to a regular folder structure like I can with CorBusiness products.\n\nThe question therefore is : Is there an alternative way ... that I can let only a group of people in a CSM Group access a 'no-log-in' NG report ... or ... is the only way to control NG access from a HyperVu link to re-introduce log-in details?",
+      "resolution": "Resolved",
+      "solution": "In CorVu NG Web, all the links & objects are stored in the NG\nrepository database - not on a disk filepath like HyperVu, so you have to use Repository security to prompt for users who run NG weblinks. Then you can assign users and/or groups with permissions to view the report or dashboard. This can be done using CorVu Web Pro, login as admin, connect to the secure repository, login as a repository admin user account, go to the Repository Explorer tab. Select the object from the Workspaces and right-click to select properties.\n\nIf security is allowed in the repository you will see the Security option, and then you can add/remove users or groups and assign permissions - see pic below\n\nE.g. in the screenshot from NG Web Pro below, I have given bsingh Browse permissions which means he can run the dashboard and mwoodall has full permissions, but the Users group have None. ( For HELP Press the F1 for help on the permissions when you are in NG Workstation Pro, in the properties panel).",
+	  "keywords":"CorVu NG:10,HyperVu:9,Single Sign On:9,single sign:9,CorVu Web Pro:9,Report:8,Dashb0ard:8",
+	  "contacts":"mwoodall@rocketsoftware.com,alogachev@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "CorVu NG - Have to restart Apache Tomcat regularly",
+      "description": "We have developed a number of dashboards, some of them use large and complex queries. There is a fair amount of users that use the various dashboards concurrently.\n\nUsers are reporting all too frequently, every day, throughout the day, that dashboards are becoming unresponsive. As a workaround, the client's IT have put in place a scheduled batch file that restarts the Apache service every hour, and also clears out the CorVu NG cache directories. Normal 0 false false false EN-AU X-NONE X-NONE      \n\nWe are using Apache Tomcat version 6, and CorVu NG 3.0. Do you have any suggestions about what might be causing the dashboards to become unresponsive, requiring an Apache restart?",
+      "resolution": "Resolved",
+      "solution": "We recommend that you upgrade NG to ver 3.0.2 first, and monitor the performance. Then make plans to upgradeJava & Tomcat to 64bit later.\n\nUpgrading NG Workstation and Web is quite straight forward, and will preserve your existing repositories.\n\nThe repositories are stored separately from the programs in different folder locations.\n\nThe -Xms is same as Initial memory pool. this tells Tomcat to grab a block of memory when it loads up. If it cannot grab that amount it cannot start. In order to make 512MB of memory available, the server may need to be restarted to clear out all other processes. Set the Initial memory in Tomcat and apply, but do not restart. Instead reboot the server. Tomcat can then grab the memory and reserve it on boot up.\n\nThe -Xmx is same a Maximum memory pool, and tells Tomcat/Java when to STOP grabbing memory and forces it to recycle what it already has. The top limit will be approx 2GB because of the 32bit Java limit. Java will continuously check the used memory and re-allocate it as required within the maximum threshold. It there is just not enough memory to keep everything running then it will log java.heapstack memory errors, and new users will not get in. \nWhen time permits you should re-visit the dashboards and clean up the queries to remove redundant references, and this will improve performance, although I cannot say by how much.",
+	  "keywords":"CorVu NG:10,Tomcat:9,CorVu Web Pro:9,Dashboards:9,Unresponsive:8,Java:6",
+	  "contacts":"mwoodall@rocketsoftware.com,alogachev@rocketsoftware.com,mrolling@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "Unable to export workspace folders",
+      "description": "Whenever I try and export a workspace folder from CorVu I am presented with an error message: \n\nLogin Failed\n\nRSE04006. The user ID and password are invalid.\n\nI am logged in using my account, which I believe is an Administrator, and my name appears as the folder owner. I have copied the folder from Lawrence Giordano's workspace but this seems to happen on folders which I have created myself from scratch. Laurence Hendy seems to be able to export folders, regardless of who is listed as the product owner but my account was created based on his. Please could you suggest what the problem might be?",
+      "resolution": "Resolved",
+      "solution": "It seems that the problem is limited to admin users (members of administrators group). Ordinary users can export workspace folders that they created without any issues. But when an admin user tries to do the same, this error message occurs. The only exception (the only one I found) is the default (master) admin user, who was created together with the repository. This admin user can also export folders. Maybe this is Laurence's account.\n\nSo, there are two options:\n\n1. If you know which account is default (master) admin account, and you know the password, you can try to log in using this account and export the folder.\n\n2. You can create a standard user account with personal workspace and copy the folder that you want to export to his workspace (you will need to log in with this new account first to create new workspace). Then log in as new user and export the folder. You will still be the owner of the folder.",
+	  "keywords":"CorVu NG:10,Export worksapce:9,Error message:9,User ID and Password are invalid:8",
+	  "contacts":"mwoodall@rocketsoftware.com,alogachev@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "New AD user not being added to Everyone",
+      "description": "We have a recently married user who has been given a new user id.  She has been unable to access our LIVE Dashboards which uses LDAP SSO  , however is ok logging onto our development. \n\nShe is in the list of users if I expand the users tab. however security on all our objects is set to \"everyone\" as browse. \n\nWhen we expand everyone the user name is not there. however it is in the groups.  \n\n Is there a refresh method for group everyone.",
+      "resolution": "Resolved",
+      "solution": "In NG Workstation expand the repository and select Users and Groups.\n\nExpand the Users, find the problem user account, if listed and right-click to select Properties.\n\nSelect User Membership. Click on Restore Defaults and apply. Then select any other memberships required.\n\nclick OK to save, then test. - see pic below.\n\nThe built-in group called everyone is assigned to all accounts, and you cannot list the users which belong to it.\n\nHowever in the Dashboard Globals>Security Lists, you could manually create a security list called everyone, and this would then need to be updated manually as it does not inherit any usernames.\n\nIf this is still a problem, please provide the NG version (Help>About CorVu Workstation Pro) and I'll check with our tech team.",
+	  "keywords":"CorVu NG:10,AD user:9,Active Directory user:9,Everyone:9",
+	  "contacts":"mwoodall@rocketsoftware.com,alogachev@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "Need assistance enabling Single Sign-On",
+      "description": "We now have Corvu Users and Corvu Admins groups set up in Active Directory, and we have this working correctly so that Workstation Pro appears to honor the logged-in user. However, it still prompts for the credentials for connecting to the source SQL Server databases. I will need some assistance in eliminating these prompts for credentials, and for allowing CorVu Web to also honor the logged-on Windows user. I will be available any time after 9am PDT every day next week.",
+      "resolution": "Resolved",
+      "solution": "You will need to set server.xml under Tomcat/conf directory to bypass Tomcat Authentication on the AJP port. Look for the line that has 8009 in it and add tomcat Authentication=\"false\" like below:\n<Connector port=\"8009\" protocol=\"AJP/1.3\" redirectPort=\"8443\" tomcatAuthentication=\"false\" />\nAfter this, in NG Web, select View -> Preferences. Click on Single Sign-On on the left. Make sure Username Source is set to HTTP_USER_PRINCIPAL and Username format is set to Domain.\n\nC lick Apply, click OK. Now click the \"X\" in the upper right hand corner of the NG Web Window (not the browser) or select File -> Exit from NG Web Window.\nYou will need to restart TomCat after making these changes to take affect.\nIf IE is set to automatically pass the logged on credentials, you should use the ISAPI_Redirector URL for accessing NG Web, not the TomCat URL.",
+	  "keywords":"CorVu NG:10,Single Sign-On:9,Single Sign On:9,single sign:9,CorVu Web:9,assistance:9,IIS:8,Redirector:6",
+	  "contacts":"mwoodall@rocketsoftware.com,mcarlson@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "Using hardcoded connection credentials in advanced settings",
+      "description": "I have tried using the Advanced settings to save the user and password but I recieve errors when I try to connect. I will attach the errors as they are slightly different depending on the data source I am connecting to. i.e. Oracle vs SQL.  \n\nNB I am using the same user and password I enter in the 'Set User Information' dialog box. ",
+      "resolution": "Resolved",
+      "solution": "SQL Server error. \n\nThis error usually occurs either when user / password parameters are not specified or when ntlmauth.dll library required for JDTS to work with Windows authentication on Microsoft SQL Server is missing.\n\nPlease make sure that user and password parameters are selected ('Include' check boxes are selected) and values specified in the Advanced settings (please see screenshot). \n\nIf this is not the problem, try to copy the ntlmauth.dll - which is shipped with the JTDS driver - to the %CorVu Workstation Pro isntall directory%\\jre\bin\\ (e.g. C:\\Program Files (x86)\\Rocket Software\\CorVu NG\\CorVu Workstation Pro\\jre\bin). Restart application and try again.\n\nYou can find this DLL in JDTS driver zip file: jtds-1.3.1-dist.zip >> x86\\SSO tlmauth.dll\n\nIf this doesn't help, please provide MS SQL Server and JTDS driver versions.\n\nOracle connection error.\n\nThis also looks like username/password is not specified. Make sure that 'Include' check boxes are selected for user and password parameters.\n\nI wonder if the user name and password are saved when you click Ok to close the Advanced settings window. Try to set User and Password, then click OK, then open Advanced settings again.",
+	  "keywords":"CorVu NG:10,Connection credentials:9,hardcoded:9,data sources:9,oracle:6,SQL:6",
+	  "contacts":"alogachev@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "Issue with accessing LDAP repository use in NG Workstation Pro",
+      "description": "Ever since we've had our LDAP repositories set up, we have been unable to access these in NG Workstation Pro. If we try to access them in any way through WP,  we recieve the following message; REP01008. Not enough permissions to perform operation. Most of the time I just work around it using our non-LDAP repository and saving through WebPro but it would be useful to resolve this going forward.\n\nCan you please advise?",
+      "resolution": "Resolved",
+      "solution": "I believe I've solved the problem.  Prompted by your note about being in the administrators group, along with the fact that when I connect to a non-LDAP repository it requires a log in but not with LDAP ones, I had a look in the Security field of Edit Repository. At the bottom of the main panel there is a section on SSO and the Accept user's credentials was ticked. Unticking this prompted a log in when using Workstation Pro and I can now access the repositories.",
+	  "keywords":"CorVu NG:10,LDAP repository:9,LDAP:9,REP01008:9,Not enough permissions:8",
+	  "contacts":"mwoodall@rocketsoftware.com,alogachev@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "Repository Storage Log-in prompt",
+      "description": "Every time a user attempts to connect to a repository, (that is contained in our CORVU_NG Repository Storage, our new SQL database) they are asked for a password. I can’t see how I can bypass this? I’m familiar with log-in mapping, that prevents them being asked for a database log-in details every time they access databases within a repository, but I’m not able to bypass this ‘top-level’ Repository Storage password prompt? Can you advise? ",
+      "resolution": "Resolved",
+      "solution": "You should be able to save user name and password for the repository storage. You can do this in the repository storage settings:\n1. Go to the Repositories view, right-click your repository storage and select Edit.\n2. On the Connection tab specify  User Id and Password, and select 'Remember password' check box.\n3. Apply the changes. You can also specify repository storage user id and password directly in a repository connection:\n1. In the Repository Connections view, right-click a repository connection and select Properties.\n2. Click 'Set User Information'.\n3. Specify User Id and password and select 'Remember password' check box.\n4. Apply the settings.",
+	  "keywords":"CorVu NG:10,Repository Storage:9,Log-in prompt:9,Repository:9,SQL database:8",
+	  "contacts":"mwoodall@rocketsoftware.com"
+    },
+    {
+      "type": "instruction",
+      "title": "ISAPI Redirect and SSO Install Procedure",
+      "description": "This document provides detailed instrutions on how to setup Single Sign-On in CorVu NG.",
+      "resolution": "Resolved",
+      "solution": "https://wiki.rocketsoftware.com/display/CV/How+to+setup+SSO+with+CorVu+NG+and+CSM",
+	  "keywords":"CorVu NG:10,Single Sign-On:9,single sign on:9,single sign:9, LDAP:7,Redirector:8,Apache Tomcat:6"
+    },
+    {
+      "type": "help",
+      "title": "Setting single sign-on preferences",
+      "description": "This help article describes Single Sign-On preferences in CorVu Workstation Pro",
+      "resolution": "Resolved",
+      "solution": "You use the Single sign-on page of the Preferences window to enable Kerberos security support.\n\n\nIf you use the Kerberos Network Authentication Protocol to manage user login information, you can enable Kerberos single sign-on from the Preferences window. Kerberos is a computer network authentication protocol, which allows nodes communicating over a non-secure network to prove their identity to one another in a secure manner. To specify the single sign-on preferences:\n1.Select View  → Preferences. The Preferences window opens. Select Single sign-on from the tree.\n2.Select the Enable single sign-on support check box to enable the current version of CorVu NG to connect to your Kerberos security client when the application is started. \n3.Specify a string in the Login context field that will identify CorVu NG as a client to your Kerberos security system. This string will enable CorVu NG to communicate with Kerberos.\n4.Click Apply to save your preferences choices.\n5.Click Restore Defaults to restore the default preference values.\n6.Click OK to close the Preferences window.\n",
+	  "keywords":"CorVu NG:10,SSO:9,CorVu Workstation Pro:9,Single Sign-On:9,single sign:9,single sign on:9,ISAPI Redirect:8,Documentation:9"
+    },
+    {
+      "type": "help",
+      "title": "Setting single sign-on preferences",
+      "description": "This help article describes Single Sign-On preferences in CorVu Web Pro",
+      "resolution": "Resolved",
+      "solution": "You use the Single sign-on page of the Preferences window to enable Kerberos security support.\n\nIf you use the Kerberos Network Authentication Protocol to manage user login information, you can enable Kerberos single sign-on from the Preferences window. Kerberos is a computer network authentication protocol, which allows nodes communicating over a non-secure network to prove their identity to one another in a secure manner.\n\nEnabling the Single sign-on feature requires that you configure Kerberos for preliminary validation. For information about configuring preliminary validation in Kerberos, consult your Kerberos documentation\n\nPrerequisites\n\nSet Tomcat+SNEGO or IIS+Tomcat to domain authentication.\n\nTo specify the Single sign-on preferences:\n\nSelect View → Preferences. The Preferences window opens. Select Single sign-on from the tree.\nSelect the necessary Username source:\nHTTP_REMOTE_USER. To obtain user name directly from HTTP request.\nHTTP_USER_PRINCIPAL. To obtain user name from User Principal Name in HTTP request.\nHTTP_HEADER. To obtain user name from HTTP request header, the specified parameter in Header text field is used.\nSelect the necessary Username format:\nNone does not process the received string.\nDomain gets a username from a domain string. This string has the formula: Domain\\Username.\nEmail gets a username from an email string. This string has the formula: username@domain.\nClick Apply to save your preferences choices.\nClick Restore Defaults to restore the default preference values.\nClick OK to close the Preferences window.",
+	  "keywords":"CorVu NG:10,CorVu Web Pro:9,Single Sign-On:9,single sign:9,single sign on:9,Preference:8,Network Authentication:6,Documentation:9"
+    },
+    {
+      "type": "help",
+      "title": "Active directory single sign-on",
+      "description": "This help article describes how to configure Single Sign-On in CorVu Web Pro",
+      "resolution": "Resolved",
+      "solution": "CorVu NG supports Active Directory (AD) single sign-on. Single sign-on is a characteristic of access control that uses centralized authentication servers for determining whether a user’s sign-on can be used to access multiple applications and systems.\n\nIt is likely that developers, programmers, business analysts and managers need access to multiple systems and applications related to your business. Requiring users to enter their credentials every time they log in to a system is time consuming, inconvenient and can cause password fatigue.\n\nEnabling Active Directory single sign-on for your users\nYou can enable Active Directory single sign-on for CorVu NG users by selecting the Accept user’s credentials check box on the Main page of the Create new shared repository wizard.\n\nActive Directory single sign-on is available with LDAP and CSM providers.\n\nBy selecting the Accept user’s credentials check box, you are granting users access to a secured repository, without requiring them to enter their user credentials.\n\nIf you plan on enabling Active Directory single sign-on access to secured repositories, adhere to the steps outlined in the following section.\n\nRecommended method for preparing CorVu NG single sign-on\nThe following list represents the recommended method for preparing CorVu NG single sign-on:\nConfigure the Active Directory security for the application server on which CorVu Web Pro is installed\nNote: Check that the application server supports user’s authentication through Negotiate Protocol.\nInstruct your users to add the necessary resource to the trusted resources list in the browser.\nIf you want to create a web service connection so that CorVu NG can access the repository with an active single sign-on function, then configure the Kerberos Network Authentication Protocol in CorVu NG.\nCorVu NG single sign-on processing for different server configurations\nThe following list describes CorVu Web Pro single sign-on processing behavior for server configurations that do not implement Active Directory security.\nIf the Active Directory security is not configured for the application server on which CorVu NG is installed, then the user will be always prompted to enter the login name and password in the browser window.\nThe web service connection to this server from CorVu NG can be established without any additional settings; in this case the current user name will be used as a login (on condition that this user is logged in to any domain). The domain name is not important.\nNote: In this type of configuration, the login name is sent to CorVu Web Pro without any additional protection.\nIf you plan on implementing single sign-on to secured repositories from CorVu NG only, keep in mind that the current user name, belonging to any domain, provides the login credentials as described above.\nThe authentication checking process takes place within the workstation application and the login is not sent to the server.\n\nIn a configuration in which the application gets the user’s login, the application attempts to find the name among those registered in the repository. If the application finds the name, the connection to the repository is established on behalf of this user; otherwise, the application prompts the user to enter his or her login name and password.",
+	  "keywords":"CorVu NG:10,CorVu Workstation Pro:9,Active Directiry:9,Single Sign-On:8,single sign:8,single sign on:8,Documentation:9"
+    },
+    {
+      "type": "help",
+      "title": "Specifying Single sign-on settings for Rocket CorVu Express",
+      "description": "This help article describes how to configure Single Sign-On in CorVu Express",
+      "resolution": "Resolved",
+      "solution": "In Rocket CorVu Express you can specify Single sign-on (SSO) settings and run visual dashboards that are exported from secured repositories with SSO authentication.\nYou must configure a web server on which you deploy Rocket CorVu Express to use SSO in secured repositories with SSO authentication.\nIn case of SSO authentication, Rocket CorVu Express applies the user name and password that are used for authentication in Windows.\nTo specify the source for the user name for SSO:\nOpen the Rocket CorVu Express application by launching the Administrator component: http(s)://[server]:[port]/cvexpress/admin.Click the Application Settings button  to open the Global Application Settings window.In the Single sign-on area, select the source for the user name from the User name source field.If you select an HTTP header as the user name source, specify the value for the header in the Header field.From the User name format field, select a format for the user name.Click Save to save the applied changes and close the Global Application Settings window.\nTip: The SSO repository settings are stored in the.storage file in the CorVu Web Pro home directory. To apply the settings, you can specify the .storage file in the Application Settingsfield of the Global Application Settings window. Click Browse to navigate to and select the .storage file.",
+	  "keywords":"CorVu NG:10,CorVu Express:9,Single Sign-On:9,single sign on:9,single sign:9,Documentation:9"
+    },
+    {
+      "type": "customer",
+      "title": "Unable to connect to an existing repository",
+      "description": "Error Message:\nAn error occurred while connecting to repository:\nREP01004. The following error has occurred while accessing database: SQM02021. Inconsistent profile data for queries package 'BIDBCT:MSSQL' were detected. Rebind package.\n\nThis is a repository that I was connected to using 2.2 build from 20120426.  I upgraded to 2.2.3.1 Build ID: 20121130 and since the upgrade I cannot connect to that repository.  It is a SQL Server database and I have another repository I am connected to in that same instance of SQL Server.  I tried setting it up as a new repository connection and was still not able to connect.",
+      "resolution": "Resolved",
+      "solution": "Rebind the packages for the Repository Storage using NG Workstation\n1. Disconnect from your Repository Connection.\n2. From the Administrator's perspective, select the Repositories tab (not the Repository Explorer tab)\n3. Select the Repository Storage that contains the repository that you are attempting to connect; right-click and select Edit. 4. Enter the id and password in the Connection tab.\n5. Click on the Protection tab.\n6. Verify that the Collection ID is correct. Click the Create button to rebind the packages (Stored Procedures).\n7. Click the Grant button to grant the ability for users to use the packages.\n8. Click OK.\n9. Connect to your Repository Connection.",
+	  "keywords":"CorVu NG:10,Repository:9,error messages:8,error message:9,error:9,REP01004:6,SQM02021:8,MS SQL Server:8",
+	  "contacts":"mwoodall@rocketsoftware.com,alogachev@rocketsoftware.com,mcarlson@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "Accessing CorVu NG 2.x repository with CorVu NG 3.0.3 fails",
+      "description": "I have a shared repository that can be accessed correctly with NG 2.x but when I try to access the repository with NG 3.0.0 I get told to \"rebind the package\". See attachment for repository properties and error message",
+      "resolution": "Resolved",
+      "solution": "Rebind the packages for the Repository Storage using NG Workstation\n1. Disconnect from your Repository Connection.\n2. From the Administrator's perspective, select the Repositories tab (not the Repository Explorer tab)\n3. Select the Repository Storage that contains the repository that you are attempting to connect; right-click and select Edit. 4. Enter the id and password in the Connection tab.\n5. Click on the Protection tab.\n6. Verify that the Collection ID is correct. Click the Create button to rebind the packages (Stored Procedures).\n7. Click the Grant button to grant the ability for users to use the packages.\n8. Click OK.\n9. Connect to your Repository Connection.",
+	  "keywords":"CorVu NG:10,Repository:9,error messages:8,error message:9,error:9,Rebind packages:8",
+	  "contacts":"mwoodall@rocketsoftware.com,alogachev@rocketsoftware.com"
+    },
+    {
+      "type": "customer",
+      "title": "Upgrading to NG 3.1",
+      "description": "We are trying to upgrade our system to NG3.1 but we are encountering the following error;\n\n'REP01031. Repository storage table structure is obsolete. Contact repository storage administrator.'\n\nYour advice is appreciated",
+      "resolution": "Resolved",
+      "solution": "To fix this run the NG CorVu Web Pro program in your browser to load up the new v3.1 session. Log in as admin.\nDo not connect to a repository.\nOpen the Repositories tab, and right-click on the development repository storage called  jdbc:sqlserver://etc..\nSelect Edit, then in the Edit Repository Storage, select Object tab. - see screenshot below. \nDon't tick any boxes.\nClick on Update button.  A success message should appear.",
+	  "keywords":"CorVu NG:10,Repository storage:9,error messages:8,error message:9,error:9,Table structure is obsolete:8,REP01031:8",
+	  "contacts":"mwoodall@rocketsoftware.com,alogachev@rocketsoftware.com,mcarlson@rocketsoftware.com"
+    },
+    {
+      "type": "technote",
+      "title": "How to repair the error 'Rebind Package' when changing versions of NG",
+      "description": "After upgrading some workstations to a later version of CorVu NG, you may find that the following Rebind package error can occur when attempting to connect to a repository storage created in an earlier version.\n",
+      "resolution": "Resolved",
+      "solution": "To rebind the packages for the Repository Storage using NG Workstation follow these steps;\nDisconnect from your Repository Connection.From the Administrator's perspective, select the Repositories tab.Select the Repository Storage that produces the error when attempting to connect; right-click and select Edit (I can see this in your first screenshot). Click on the Objects tab, then click the Update button to refresh the repository storage structure..Click OK.Connect to your Repository Connection and test.\nMore information:\n\nIf your repository storage tables have been protected by using the Protection tab options, then you should also re-Create the protection procedures and grant access to specific user IDs again. To do this follow the instructions on the Protection tab of the Edit Repository Storage panel.",
+	  "keywords":"CorVu NG:10,Rebind Package:9,error messages:8,error message:9,error:9"
+    },
+    {
+      "type": "customer",
+      "title": "LDAP - Apache Tomcat Redirector",
+      "description": "Hi, I have just installed the following versions of CorVu for the first time:\nCorVu/HyperVu 5.40\nCorVu NG 2.4.1.1\nJava 7\nApache 7\nTomcat Redirector 1.2.37\n\nPreviously, we have done implementations with the following product versions:\nCorVu/HyperVu 5.30.R02\nCorVu NG 2.2\nJava 6\nApache 6\nTomcat Redirector 1.2.37\n\nEverything mostly seems to be the same, but I am unable to access dashboards from outside of the server where everything is installed. On the server, everything is perfect, LDAP works, IE opens straight into my dashboard. However, outside of the server, I get prompted to enter AD user credentials, and when I enter them, it doesn't accept them. I push enter and the logon box just comes back up. Eventually if I push escape on the logon box, it says:\n\n401 - Unauthorized: Access is denied due to invalid credentials.You do not have permission to view this directory or page using the credentials that you supplied.\n \nI have added the site to the local intranet zone and it makes no difference. I have also validated my installation process and it is identical to what we have always done.\nDo you know what might cause this issue? Is there any issue with the fact that we are using version1.2.37 of the Tomcat Redirector, with Java/Apache 7 instead of Java/Apache 6?",
+      "resolution": "Resolved",
+      "solution": "First of all, try to restert the server and Tomcat Service.",
+	  "keywords":"CorVu NG:10,LDAP:9,Single Sign-On:9,Redirector:8,Apache Tomcat:6",
+	  "contacts":"mwoodall@rocketsoftware.com,alogachev@rocketsoftware.com,mrolling@rocketsoftware.com"
+    }
+  ]
+}

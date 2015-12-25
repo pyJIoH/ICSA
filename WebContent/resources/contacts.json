@@ -1,0 +1,40 @@
+{
+  "contacts": [
+  {
+    "name":"Mark Woodall",
+    "email":"mwoodall@rocketsoftware.com",
+    "phone":"+12345670000",
+    "products":"CorBusiness,CorVu NG,CSM,Folio"
+  },
+  {
+    "name":"Mike Carlson",
+    "email":"mcarlson@rocketsoftware.com",
+    "phone":"+12345670001",
+    "products":"CorBusiness,CorVu NG,Folio,Discover"
+  },
+  {
+    "name":"Andrey Logachev",
+    "email":"alogachev@rocketsoftware.com",
+    "phone":"+12345670002",
+    "products":"CorVu NG"
+  },
+  {
+    "name":"Martyn Rolling",
+    "email":"mrolling@rocketsoftware.com",
+    "phone":"+12345670003",
+    "products":"CorBusiness,CorVu NG,CSM"
+  },
+  {
+    "name":"Richard Mu",
+    "email":"mwoodall@rocketsoftware.com",
+    "phone":"+12345670000",
+    "products":"CorBusiness,CSM,Discover"
+  },
+  {
+    "name":"PatrickThomas Aloumbe Adine",
+    "email":"mwoodall@rocketsoftware.com",
+    "phone":"+12345670000",
+    "products":"CorVu NG,SPSS"
+  }
+  ]
+}
